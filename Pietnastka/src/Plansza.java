@@ -1,3 +1,7 @@
+import java.math.BigInteger;
+
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Plansza {
@@ -55,6 +59,16 @@ public class Plansza {
 		
 	}
 	
+	public String zwrocUstawienie() {
+		String tmp = "";
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++)
+				tmp = tmp + String.format("%02d", tab[i][j]);
+		}
+		return tmp;
+	}
+	
+
 	public void wypelnijPoKolei()
 	{
 		int licz=0;
@@ -69,11 +83,6 @@ public class Plansza {
 	}
 
 	
-	////////////////	////////////////	////////////////	////////////////
-	////////////////	////////////////	////////////////	////////////////
-	////////////////	////////////////	////////////////	////////////////
-	////////////////	////////////////	////////////////	////////////////
-
 	public void wylosujDoZrobienia(int iloscKrokow)
 	{
 		for(int i = 0 ; i<iloscKrokow ; i++)
@@ -90,6 +99,25 @@ public class Plansza {
 			for (int j = 0; j < 4; j++)
 				System.out.print(tab[i][j]+"\t");
 		}
+	}
+	
+	//0 - nie;
+	//1 - ok;
+
+	public int sprawdz()
+	{
+		int[][] tab2 = new int[4][4];
+		int licz=0;
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++)
+			{
+				tab2[i][j]=licz;
+				licz++;
+			}
+		if (Arrays.deepEquals(tab, tab2)){return 1;}
+//		if (tab.equals(tab2)){return 1;}
+		else
+		{return 0;}
 	}
 	
 	//0 - nie da sie;
@@ -131,6 +159,20 @@ public class Plansza {
 		case PRAWO: {if(zmien(pozycjaZeroX,pozycjaZeroY, pozycjaZeroX,pozycjaZeroY+1)==1){return 1;} break;}
 		case GORA: {if(zmien(pozycjaZeroX,pozycjaZeroY, pozycjaZeroX-1,pozycjaZeroY)==1){return 1;} break;}
 		case DOL:{if(zmien(pozycjaZeroX,pozycjaZeroY, pozycjaZeroX+1,pozycjaZeroY)==1){return 1;} break;}
+		}
+		return 0;
+	}
+	
+	//0 - nie da sie;
+	//1 - ok;
+	public int czyMogeRuszyc(Strony strona)
+	{
+		switch (strona)
+		{
+		case LEWO:{if(zmien(pozycjaZeroX,pozycjaZeroY, pozycjaZeroX,pozycjaZeroY-1 )==1){ zmien(pozycjaZeroX,pozycjaZeroY, pozycjaZeroX,pozycjaZeroY+1); return 1;} break;}
+		case PRAWO: {if(zmien(pozycjaZeroX,pozycjaZeroY, pozycjaZeroX,pozycjaZeroY+1)==1){zmien(pozycjaZeroX,pozycjaZeroY, pozycjaZeroX,pozycjaZeroY-1); return 1;} break;}
+		case GORA: {if(zmien(pozycjaZeroX,pozycjaZeroY, pozycjaZeroX-1,pozycjaZeroY)==1){ zmien(pozycjaZeroX,pozycjaZeroY, pozycjaZeroX+1,pozycjaZeroY); return 1;} break;}
+		case DOL:{if(zmien(pozycjaZeroX,pozycjaZeroY, pozycjaZeroX+1,pozycjaZeroY)==1){ zmien(pozycjaZeroX,pozycjaZeroY, pozycjaZeroX-1,pozycjaZeroY); return 1;} break;}
 		}
 		return 0;
 	}
