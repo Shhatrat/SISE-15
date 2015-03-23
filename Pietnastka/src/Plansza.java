@@ -1,5 +1,4 @@
 import java.math.BigInteger;
-
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Random;
@@ -175,5 +174,23 @@ public class Plansza {
 		case DOL:{if(zmien(pozycjaZeroX,pozycjaZeroY, pozycjaZeroX+1,pozycjaZeroY)==1){ zmien(pozycjaZeroX,pozycjaZeroY, pozycjaZeroX-1,pozycjaZeroY); return 1;} break;}
 		}
 		return 0;
+	}
+	
+	@Override
+	public String toString() {	
+		String oo = "";
+		for (int i = 0; i < 4; i++) 
+		for (int j = 0; j < 4; j++)
+			oo = oo + tab[i][j];
+		return oo;
+		}
+	
+	public Plansza(){}
+	
+	public Plansza(Plansza oo)
+	{
+		this.pozycjaZeroX = oo.pozycjaZeroX;
+		this.pozycjaZeroY = oo.pozycjaZeroY;
+		this.tab = oo.tab;
 	}
 }

@@ -4,47 +4,28 @@ import java.util.*;
 public class BFS 
 {
 	public Plansza pl;
-	ArrayList<String> lista;
+	public List<PlanszaDoListy> lista;
 	
-	public BFS (Plansza poczatkowy)
+	
+	
+	
+	public BFS(Plansza pl) 
 	{
-		this.pl= poczatkowy;
-		lista = new ArrayList<>();
+		this.pl = pl;
+		this.lista = new ArrayList<PlanszaDoListy>();
 	}
-	
+
 	public void przeszukaj()
 	{
-		System.out.println("OK");
-		Boolean posortowane = false;
-		if(pl.sprawdz()==1){posortowane=true;}
-		while(posortowane==false)
-		{
-			if(pl.sprawdz()==1){posortowane=true;}
-			//mozliwosci ruchu
-			if(pl.zmienBezWspolrzednych(Plansza.Strony.GORA) ==1)
-			{
-				if(!czyByl())	
-				{
-					
-				}
-				pl.zmienBezWspolrzednych(Plansza.Strony.DOL);
-				
-			}	
-		}
-		System.out.print("KONIEC");
+		lista.add(new PlanszaDoListy(0, pl));
+		pl.zmienBezWspolrzednych(Plansza.Strony.DOL);
+		lista.add(new PlanszaDoListy(1, pl));
+		pl.zmienBezWspolrzednych(Plansza.Strony.DOL);
+		lista.add(new PlanszaDoListy(1, pl));
+		System.out.print(lista.toString());
 		
-	}
-	
-	public boolean czyByl()
-	{
-		if(lista.contains(pl.zwrocUstawienie()))
-		{
-			return true;
-		}
-		else
-			return false;
+	//	System.out.print("KONIEC, ilosc krokow=" + licznik);
 		
-	}
-	
+	}	
 	
 }
