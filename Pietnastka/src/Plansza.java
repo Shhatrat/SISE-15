@@ -3,8 +3,9 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Plansza {
-	int[][] tab = new int[4][4];
+public class Plansza implements Cloneable
+{
+	int[][] tab;// = new int[4][4];
 	int pozycjaZeroX;
 	int pozycjaZeroY;
 
@@ -185,12 +186,23 @@ public class Plansza {
 		return oo;
 		}
 	
-	public Plansza(){}
-	
-	public Plansza(Plansza oo)
+	public Plansza()
 	{
-		this.pozycjaZeroX = oo.pozycjaZeroX;
-		this.pozycjaZeroY = oo.pozycjaZeroY;
-		this.tab = oo.tab;
+		tab = new int[4][4];
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		Plansza cloned = (Plansza) super.clone();
+		for(int i = 0; i<4 ; i++)
+			for(int j = 0; j<4 ; j++)
+		{
+			cloned.tab[i][j] = 5;//tab[i][j];
+			//Arrays.copyOf(tab[0][2], tab[1][2]);
+		}
+		cloned.pozycjaZeroX = pozycjaZeroX;
+		cloned.pozycjaZeroY = pozycjaZeroY;
+		return cloned;
 	}
 }
