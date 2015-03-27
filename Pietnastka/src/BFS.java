@@ -14,6 +14,11 @@ public class BFS
 		this.pl = pl;
 		this.lista = new ArrayList<PlanszaDoListy>();
 	}
+	
+	public void ewwqewqe()
+	{
+		
+	}
 
 	public void przeszukaj()
 	{
