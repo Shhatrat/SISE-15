@@ -11,10 +11,7 @@ public class PlanszaDoListy
 		this.plansza = plansza;
 	}
 
-	@Override
-	public String toString() {
-		return "PlanszaDoListy [plansza=" + plansza + "]";
-	}
+	
 	
 	
 	
