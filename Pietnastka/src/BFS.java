@@ -16,32 +16,45 @@ public class BFS {
 
 	public boolean sprawdzIdodajDoListy(int indeksRodzica)
 			throws CloneNotSupportedException {
-		if(wykonaj(lista.get(indeksRodzica), Plansza.Strony.DOL,
+		if(wykonaj(indeksRodzica, Plansza.Strony.DOL,
 				Plansza.Strony.GORA)){System.out.print("jest");return true;};
-		if(wykonaj(lista.get(indeksRodzica), Plansza.Strony.GORA,
+		if(wykonaj(indeksRodzica, Plansza.Strony.GORA,
 				Plansza.Strony.DOL)){System.out.print("jest");return true;};
-		if(wykonaj(lista.get(indeksRodzica), Plansza.Strony.PRAWO,
+		if(wykonaj(indeksRodzica, Plansza.Strony.PRAWO,
 				Plansza.Strony.LEWO)){System.out.print("jest");return true;};
-		if(wykonaj(lista.get(indeksRodzica), Plansza.Strony.LEWO,
+		if(wykonaj(indeksRodzica, Plansza.Strony.LEWO,
 				Plansza.Strony.PRAWO)){System.out.print("jest");return true;};
 				return false;
 	}
 
-	public boolean wykonaj(Plansza pl, Plansza.Strony strona,
+	public boolean wykonaj(int indeksRodzica, Plansza.Strony strona,
 			Plansza.Strony strona2) throws CloneNotSupportedException {
+		Plansza pl = lista.get(indeksRodzica);
 		if (pl.zmienBezWspolrzednych(strona) == 1) {
-			if (pl.sprawdz() == 1) {
+			
+			
+			if (pl.sprawdz() == 1) 
+			{
 
-				lista.add((Plansza) pl.clone());
+//				lista.add((Plansza) pl.clone());
+				Plansza cloned = (Plansza) pl.clone();
+				cloned.rodzic = indeksRodzica;
+				lista.add(cloned);
 				pl.wypisz(); System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA" + pl.rodzic);
+				pl.zmienBezWspolrzednych(strona2);
+
 				return true;
 				
 			}
 
+						
 			Plansza cloned = (Plansza) pl.clone();
+			cloned.rodzic = indeksRodzica;
 			if (hash.add(cloned.tab)) {
 				lista.add(cloned);
-				System.out.println(); pl.wypisz();
+				System.out.println();
+				
+				pl.wypisz();
 			}
 
 			pl.zmienBezWspolrzednych(strona2);
@@ -61,7 +74,6 @@ public class BFS {
 		}
 		Plansza tmp = (Plansza) pl.clone();
 		tmp.rodzic = pl.rodzic;
-//		lista.add((Plansza) pl.clone());
 		lista.add(tmp);
 		hash.add(pl.tab);
 		licznik = 0;
@@ -69,15 +81,20 @@ public class BFS {
 		boolean koniec = false;
 		while (!koniec) {
 			koniec = sprawdzIdodajDoListy(licznik);
-//			pl.wypisz();
 			licznik++;
-			//System.out.println(); pl.wypisz();
-
-			if(licznik > 122110){koniec= true;}
+			if(licznik > 1221010){koniec= true;}
 			
-		}
+		}	
 
+		int i = lista.size()-1;
+		System.out.println("LICZBA ELEMENTOW = " + lista.size());
+		while(i!=0)
+		{
+			System.out.println("INDEKS = " + i);
+			lista.get(i).wypisz();
+			i = lista.get(i).rodzic;
+		}
+//		System.out.print();
 		return 0;
 	}
-
 }
