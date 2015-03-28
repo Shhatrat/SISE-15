@@ -33,7 +33,7 @@ public class BFS {
 			if (pl.sprawdz() == 1) {
 
 				lista.add((Plansza) pl.clone());
-				pl.wypisz(); System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
+				pl.wypisz(); System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA" + pl.rodzic);
 				return true;
 				
 			}
@@ -59,7 +59,10 @@ public class BFS {
 		} else {
 			pl.rodzic = 0;
 		}
-		lista.add((Plansza) pl.clone());
+		Plansza tmp = (Plansza) pl.clone();
+		tmp.rodzic = pl.rodzic;
+//		lista.add((Plansza) pl.clone());
+		lista.add(tmp);
 		hash.add(pl.tab);
 		licznik = 0;
 
