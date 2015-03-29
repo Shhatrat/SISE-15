@@ -12,15 +12,18 @@ public class PietnastkaMain {
 	{
 		Plansza pl = new Plansza();
 		pl.wypelnijPoKolei();
-		HashSet<Plansza> hs = new HashSet<>();
 		pl.wylosujDoZrobienia(10);
 		
+//		pl.wypisz();
 		pl.wypisz();
-		
+		BFS oo = new BFS(pl);
+		oo.wyszukajZwartoscia();
+//		System.out.print(pl.wylicz());
+/*		
 				System.out.print("O");
 		//pl.wypelnijPoKolei();
 		BFS oo = new BFS(pl);
-		oo.przeszukaj();
+		oo.przeszukaj();*/
 //*/	hs.add(oo);	
 		
 	//	System.out.println(oo.toString());

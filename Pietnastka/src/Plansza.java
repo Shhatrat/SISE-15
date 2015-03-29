@@ -16,7 +16,36 @@ public class Plansza implements Cloneable {
 			return values()[(int) (Math.random() * values().length)];
 		}
 	}
+	
+	
+	public int wylicz()
+	{
+		ArrayList<DoListy> lista = new ArrayList<>();
+		//int l=0;
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++)
+			{
+				lista.add(new DoListy(i, j));
+			}
 
+		int wartosc=0;
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++)
+			{
+				wartosc+=Math.abs((lista.get(tab[i][j]).x - i));
+				wartosc+=Math.abs((lista.get(tab[i][j]).y - j));
+			}
+		return wartosc;
+	}
+	
+	
+	public Plansza zwrocPlanszePoPrzesunieciu(Plansza.Strony strona) throws CloneNotSupportedException
+	{
+		Plansza nowa  = (Plansza) this.clone();
+		if(nowa.zmienBezWspolrzednych(strona)==0){return null;}else
+		return nowa;
+	}
+	
 	public void wylosujPoczatkowe() {
 
 		for (int i = 0; i < 4; i++)

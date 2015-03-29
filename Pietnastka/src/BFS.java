@@ -1,9 +1,11 @@
 import java.util.*;
 
+//import Plansza.Strony;
+
 public class BFS {
 	public Plansza pl;
 	public List<Plansza> lista;
-	public HashSet<int[][]> hash;
+	public HashSet<Plansza> hash;
 //	public HashSet<Plansza> hash;
 	public int licznik;
 
@@ -44,13 +46,12 @@ public class BFS {
 				pl.zmienBezWspolrzednych(strona2);
 
 				return true;
-				
 			}
 
 						
 			Plansza cloned = (Plansza) pl.clone();
 			cloned.rodzic = indeksRodzica;
-			if (hash.add(cloned.tab)) {
+			if (hash.add(cloned)) {
 				lista.add(cloned);
 				System.out.println();
 				
@@ -61,6 +62,51 @@ public class BFS {
 		}
 		return false;
 
+	}
+	
+	public void wyszukajZwartoscia() throws CloneNotSupportedException
+	{
+		int licznik = 0;
+		boolean koniec = false;
+		while(!koniec && licznik <1000)
+		{
+			int wynik= 10101010;
+			Plansza nowa =null;
+			Plansza nowaok = null;
+			
+			
+			for(Plansza.Strony oo : Plansza.Strony.values())
+			{
+				//System.out.println(oo);
+				nowa = pl.zwrocPlanszePoPrzesunieciu(oo);
+				if(nowa!=null)
+				{
+					if(!hash.contains(nowa.tab))
+					{
+						int w = nowa.wylicz();
+						//System.out.println("_______" + w + "   " + wynik);
+						if(w<wynik)
+						{
+							wynik = w;
+							nowaok = nowa;
+						}
+					}
+				}
+			}
+			
+			nowaok.wypisz();
+			pl= nowaok;
+			hash.add((Plansza) nowaok.clone());
+			licznik ++;
+			System.out.println("-----------" + licznik);
+			System.out.println("_________" + hash.size() + "________" + nowaok.hashCode()); 
+			if(pl.sprawdz()==1)
+			{
+				System.out.print(licznik);
+				koniec =  true;}
+			
+
+		}
 	}
 
 	public int przeszukaj() throws CloneNotSupportedException {
@@ -75,7 +121,7 @@ public class BFS {
 		Plansza tmp = (Plansza) pl.clone();
 		tmp.rodzic = pl.rodzic;
 		lista.add(tmp);
-		hash.add(pl.tab);
+		hash.add(pl);
 		licznik = 0;
 
 		boolean koniec = false;
