@@ -12,12 +12,13 @@ public class PietnastkaMain {
 	{
 		Plansza pl = new Plansza();
 		pl.wypelnijPoKolei();
-		pl.wylosujDoZrobienia(10);
+		pl.wylosujDoZrobienia(20);
 		
 //		pl.wypisz();
 		pl.wypisz();
 		BFS oo = new BFS(pl);
-		oo.wyszukajZwartoscia();
+//		oo.wyszukajZwartoscia();
+		oo.przeszukaj();
 //		System.out.print(pl.wylicz());
 /*		
 				System.out.print("O");

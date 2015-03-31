@@ -254,7 +254,7 @@ public class Plansza implements Cloneable {
 
 	public Plansza() {
 	}
-
+/*
 	@Override
 	public int hashCode() {
 		int tmp = 0;
@@ -263,7 +263,27 @@ public class Plansza implements Cloneable {
 				tmp = tmp * 16 + tab[i][j];
 		return tmp;
 	}
-	
+*/
+
+	@Override
+	public int hashCode() 
+	{
+		int tmp=0;
+		int[] b = {1, 2, 3, 5, 7, 11, 13, 17, 19, 23,29, 31, 37, 41, 43, 47};
+		int licznik = 0;
+		
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++)
+				{
+				tmp= tmp + tab[i][j] * b[licznik];
+				licznik++;
+
+				}
+				System.out.println(tmp);
+		
+		return tmp;
+		
+	}
 	
 
 	@Override

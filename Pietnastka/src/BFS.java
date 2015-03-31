@@ -56,6 +56,7 @@ public class BFS {
 				System.out.println();
 				
 				pl.wypisz();
+				System.out.println(lista.size());
 			}
 
 			pl.zmienBezWspolrzednych(strona2);
