@@ -3,7 +3,8 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Plansza implements Cloneable {
+public class Plansza implements Cloneable 
+{
 	int[][] tab = new int[4][4];
 	int pozycjaZeroX;
 	int pozycjaZeroY;
@@ -18,7 +19,7 @@ public class Plansza implements Cloneable {
 	}
 	
 	
-	public int wylicz()
+	public int wyliczKoszt()
 	{
 		ArrayList<DoListy> lista = new ArrayList<>();
 		//int l=0;
@@ -121,7 +122,6 @@ public class Plansza implements Cloneable {
 
 	// 0 - nie;
 	// 1 - ok;
-
 	public int sprawdz() {
 		int[][] tab2 = new int[4][4];
 		int licz = 0;
@@ -254,16 +254,6 @@ public class Plansza implements Cloneable {
 
 	public Plansza() {
 	}
-/*
-	@Override
-	public int hashCode() {
-		int tmp = 0;
-		for (int i = 0; i < 4; i++)
-			for (int j = 0; j < 4; j++)
-				tmp = tmp * 16 + tab[i][j];
-		return tmp;
-	}
-*/
 
 	@Override
 	public int hashCode() 
@@ -281,8 +271,7 @@ public class Plansza implements Cloneable {
 				}
 				System.out.println(tmp);
 		
-		return tmp;
-		
+		return tmp;		
 	}
 	
 
@@ -299,4 +288,21 @@ public class Plansza implements Cloneable {
 		cloned.rodzic = rodzic;
 		return cloned;
 	}
+
+
+	@Override
+	public boolean equals(Object arg0) 
+	{
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++) 
+			{
+				if(tab[i][j]!=((Plansza)arg0).tab[i][j])
+				{
+					return false;
+				}
+			}
+			return true;
+	}
+	
+	
 }

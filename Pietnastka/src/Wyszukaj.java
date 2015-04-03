@@ -2,14 +2,14 @@ import java.util.*;
 
 //import Plansza.Strony;
 
-public class BFS {
+public class Wyszukaj {
+	
 	public Plansza pl;
 	public List<Plansza> lista;
 	public HashSet<Plansza> hash;
-//	public HashSet<Plansza> hash;
 	public int licznik;
 
-	public BFS(Plansza pl) {
+	public Wyszukaj(Plansza pl) {
 		this.pl = pl;
 		this.lista = new ArrayList<Plansza>();
 		this.hash = new HashSet<>();
@@ -19,13 +19,13 @@ public class BFS {
 	public boolean sprawdzIdodajDoListy(int indeksRodzica)
 			throws CloneNotSupportedException {
 		if(wykonaj(indeksRodzica, Plansza.Strony.DOL,
-				Plansza.Strony.GORA)){System.out.print("jest");return true;};
+				Plansza.Strony.GORA)){return true;};
 		if(wykonaj(indeksRodzica, Plansza.Strony.GORA,
-				Plansza.Strony.DOL)){System.out.print("jest");return true;};
+				Plansza.Strony.DOL)){return true;};
 		if(wykonaj(indeksRodzica, Plansza.Strony.PRAWO,
-				Plansza.Strony.LEWO)){System.out.print("jest");return true;};
+				Plansza.Strony.LEWO)){return true;};
 		if(wykonaj(indeksRodzica, Plansza.Strony.LEWO,
-				Plansza.Strony.PRAWO)){System.out.print("jest");return true;};
+				Plansza.Strony.PRAWO)){return true;};
 				return false;
 	}
 
@@ -42,7 +42,7 @@ public class BFS {
 				Plansza cloned = (Plansza) pl.clone();
 				cloned.rodzic = indeksRodzica;
 				lista.add(cloned);
-				pl.wypisz(); System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA" + pl.rodzic);
+				pl.wypisz(); System.out.println("\n\n\n ZNALAZLEM");
 				pl.zmienBezWspolrzednych(strona2);
 
 				return true;
@@ -71,27 +71,26 @@ public class BFS {
 		boolean koniec = false;
 		while(!koniec && licznik <1000)
 		{
-			int wynik= 10101010;
+			int wynik= 101010;
 			Plansza nowa =null;
 			Plansza nowaok = null;
 			
 			
 			for(Plansza.Strony oo : Plansza.Strony.values())
 			{
-				//System.out.println(oo);
 				nowa = pl.zwrocPlanszePoPrzesunieciu(oo);
 				if(nowa!=null)
 				{
-					if(!hash.contains(nowa.tab))
+					if(hash.add(nowa))
 					{
-						int w = nowa.wylicz();
-						//System.out.println("_______" + w + "   " + wynik);
+						int w = nowa.wyliczKoszt();
 						if(w<wynik)
 						{
 							wynik = w;
 							nowaok = nowa;
 						}
 					}
+					nowa=null;
 				}
 			}
 			
@@ -103,14 +102,14 @@ public class BFS {
 			System.out.println("_________" + hash.size() + "________" + nowaok.hashCode()); 
 			if(pl.sprawdz()==1)
 			{
-				System.out.print(licznik);
+				System.out.print(licznik+"KONIEC");
 				koniec =  true;}
 			
-
 		}
 	}
 
 	public int przeszukaj() throws CloneNotSupportedException {
+		Plansza poczatkowa = (Plansza) pl.clone();
 		if (pl.sprawdz() == 1) {
 
 			System.out.println("OK");
@@ -122,7 +121,7 @@ public class BFS {
 		Plansza tmp = (Plansza) pl.clone();
 		tmp.rodzic = pl.rodzic;
 		lista.add(tmp);
-		hash.add(pl);
+		hash.add(tmp);
 		licznik = 0;
 
 		boolean koniec = false;
@@ -137,11 +136,14 @@ public class BFS {
 		System.out.println("LICZBA ELEMENTOW = " + lista.size());
 		while(i!=0)
 		{
-			System.out.println("INDEKS = " + i);
+			System.out.println("\n\nINDEKS = " + i);
 			lista.get(i).wypisz();
 			i = lista.get(i).rodzic;
 		}
-//		System.out.print();
+
+		System.out.println("\n\nsprawdzenie poczatkowej");
+		poczatkowa.wypisz();
 		return 0;
 	}
+	
 }

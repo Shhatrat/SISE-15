@@ -13,24 +13,19 @@ public class PietnastkaMain {
 		Plansza pl = new Plansza();
 		pl.wypelnijPoKolei();
 		pl.wylosujDoZrobienia(20);
-		
-//		pl.wypisz();
-		pl.wypisz();
-		BFS oo = new BFS(pl);
-//		oo.wyszukajZwartoscia();
+		Wyszukaj oo = new Wyszukaj(pl);
 		oo.przeszukaj();
-//		System.out.print(pl.wylicz());
-/*		
-				System.out.print("O");
-		//pl.wypelnijPoKolei();
-		BFS oo = new BFS(pl);
-		oo.przeszukaj();*/
-//*/	hs.add(oo);	
-		
-	//	System.out.println(oo.toString());
-	//	System.out.println(oo.clone().toString());
-		
-//		System.out.print(hs.toString());
+//		oo.wyszukajZwartoscia();
+
+		/*
+		HashSet<Plansza> oo = new HashSet<>();
+		System.out.print(oo.add((Plansza) pl.clone()));
+		System.out.print(oo.add((Plansza) pl.clone()));
+		pl.zmienBezWspolrzednych(Plansza.Strony.DOL);
+		//pl2 = (Plansza) pl.clone();
+		//oo.add(pl2);
+		System.out.print(oo.size());
+		*/
 	}
 
 }
