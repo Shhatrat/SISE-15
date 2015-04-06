@@ -1,5 +1,7 @@
 import java.util.*;
 
+import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
+
 //import Plansza.Strony;
 
 public class Wyszukaj {
@@ -7,11 +9,13 @@ public class Wyszukaj {
 	public Plansza pl;
 	public List<Plansza> lista;
 	public HashSet<Plansza> hash;
+	public List<Plansza> listaZamknieta;
 	public int licznik;
 
 	public Wyszukaj(Plansza pl) {
 		this.pl = pl;
 		this.lista = new ArrayList<Plansza>();
+		this.listaZamknieta = new ArrayList<Plansza>();
 		this.hash = new HashSet<>();
 		licznik = 0;
 	}
@@ -108,6 +112,73 @@ public class Wyszukaj {
 		}
 	}
 
+	
+	public int najnowsze() throws CloneNotSupportedException
+	{
+		pl.dodajKoszt();
+		Plansza poczatkowa = (Plansza) pl.clone();
+		if (pl.sprawdz() == 1) {
+
+			System.out.println("OK, znalazlem");
+			pl.wypisz();
+			return 1;
+		} else {
+			pl.rodzic = 0;
+			pl.dodajKoszt();
+			hash.add((Plansza) pl.clone());
+			lista.add((Plansza) pl.clone());
+		}
+		
+		Boolean koniec =false;
+		Plansza nowa = null;
+		int licznik=0;
+		pl.wypisz();
+		
+		while(!koniec && licznik <1000000)
+		{
+			licznik++;
+			Collections.sort(lista);
+			pl = lista.get(0);
+			pl.wypisz();
+			lista.remove(0);
+			listaZamknieta.add((Plansza) pl.clone());
+			int ro =  listaZamknieta.size()-1;
+			/*System.out.println(ro);*/
+			
+			for(Plansza.Strony oo : Plansza.Strony.values())
+			{
+				nowa = pl.zwrocPlanszePoPrzesunieciu(oo);
+				
+				if(nowa!=null)
+				{
+					if(hash.add(nowa))
+					{
+						nowa.dodajKoszt();
+						nowa.rodzic = ro;						
+						nowa.wypisz();
+						System.out.println(oo + "----------" + nowa.koszt); 
+						lista.add((Plansza) nowa.clone());
+					}
+					
+					if(nowa.sprawdz()==1)
+					{
+						System.out.println(lista.size());						
+						System.out.println(listaZamknieta.size());						
+						System.out.println(hash.size());
+						
+						pl.wypisz();
+						System.out.print(pl.rodzic);
+						return 1;
+					}
+					nowa=null;
+				}				
+			}			
+		}
+		System.out.println("KONIEC");
+		return 0;
+	}
+	
+	
 	public int przeszukaj() throws CloneNotSupportedException {
 		Plansza poczatkowa = (Plansza) pl.clone();
 		if (pl.sprawdz() == 1) {

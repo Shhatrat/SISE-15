@@ -1,14 +1,16 @@
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Random;
 
-public class Plansza implements Cloneable 
+public class Plansza implements Cloneable, Comparator<Plansza>, Comparable<Plansza>
 {
 	int[][] tab = new int[4][4];
 	int pozycjaZeroX;
 	int pozycjaZeroY;
 	public int rodzic;
+	public Integer koszt;
 
 	public enum Strony {
 		GORA, LEWO, PRAWO, DOL;
@@ -37,6 +39,12 @@ public class Plansza implements Cloneable
 				wartosc+=Math.abs((lista.get(tab[i][j]).y - j));
 			}
 		return wartosc;
+	}
+	
+	
+	public void dodajKoszt()
+	{
+		koszt = wyliczKoszt();
 	}
 	
 	
@@ -118,6 +126,7 @@ public class Plansza implements Cloneable
 			for (int j = 0; j < 4; j++)
 				System.out.print(tab[i][j] + "\t");
 		}
+		System.out.print(koszt +" \n");
 	}
 
 	// 0 - nie;
@@ -255,6 +264,9 @@ public class Plansza implements Cloneable
 	public Plansza() {
 	}
 
+	
+	
+	/*
 	@Override
 	public int hashCode() 
 	{
@@ -273,7 +285,14 @@ public class Plansza implements Cloneable
 		
 		return tmp;		
 	}
-	
+*/	
+
+	@Override
+	public int hashCode() {
+		return this.rodzic;
+		//		return this.wyliczKoszt();
+	}
+
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
@@ -286,6 +305,7 @@ public class Plansza implements Cloneable
 		cloned.pozycjaZeroX = pozycjaZeroX;
 		cloned.pozycjaZeroY = pozycjaZeroY;
 		cloned.rodzic = rodzic;
+		cloned.koszt = koszt;
 		return cloned;
 	}
 
@@ -303,6 +323,28 @@ public class Plansza implements Cloneable
 			}
 			return true;
 	}
-	
-	
+
+
+	class PlanszaKosztComparator implements Comparator<Plansza> {
+	    public int compare(Plansza o1, Plansza o2) {
+	        return o1.koszt - o2.koszt;
+	    }
+	}
+
+
+	@Override
+	public int compare(Plansza o1, Plansza o2) {
+		return Integer.compare(o1.koszt, o2.koszt);
+//		return 0;
+	}
+
+
+	@Override
+	public int compareTo(Plansza o) {
+			return (this.koszt.compareTo(o.koszt));
+//		return 0;
+	}
+
+
+		
 }
