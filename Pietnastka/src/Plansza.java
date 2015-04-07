@@ -126,7 +126,7 @@ public class Plansza implements Cloneable, Comparator<Plansza>, Comparable<Plans
 			for (int j = 0; j < 4; j++)
 				System.out.print(tab[i][j] + "\t");
 		}
-		System.out.print(koszt +" \n");
+		System.out.print( "\n" + "rodzic ===========" + rodzic +" \n");
 	}
 
 	// 0 - nie;
@@ -286,14 +286,14 @@ public class Plansza implements Cloneable, Comparator<Plansza>, Comparable<Plans
 		return tmp;		
 	}
 */	
-
+/*
 	@Override
 	public int hashCode() {
 		return this.rodzic;
 		//		return this.wyliczKoszt();
 	}
 
-
+*/
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
@@ -343,8 +343,5 @@ public class Plansza implements Cloneable, Comparator<Plansza>, Comparable<Plans
 	public int compareTo(Plansza o) {
 			return (this.koszt.compareTo(o.koszt));
 //		return 0;
-	}
-
-
-		
+	}	
 }

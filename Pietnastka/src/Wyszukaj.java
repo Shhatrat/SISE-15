@@ -8,6 +8,7 @@ public class Wyszukaj {
 	
 	public Plansza pl;
 	public List<Plansza> lista;
+	public HashSet<String> hash2;
 	public HashSet<Plansza> hash;
 	public List<Plansza> listaZamknieta;
 	public int licznik;
@@ -17,6 +18,7 @@ public class Wyszukaj {
 		this.lista = new ArrayList<Plansza>();
 		this.listaZamknieta = new ArrayList<Plansza>();
 		this.hash = new HashSet<>();
+		this.hash2 = new HashSet<>();
 		licznik = 0;
 	}
 
@@ -116,30 +118,29 @@ public class Wyszukaj {
 	public int najnowsze() throws CloneNotSupportedException
 	{
 		pl.dodajKoszt();
-		Plansza poczatkowa = (Plansza) pl.clone();
 		if (pl.sprawdz() == 1) {
 
 			System.out.println("OK, znalazlem");
-			pl.wypisz();
+			//pl.wypisz();
 			return 1;
 		} else {
 			pl.rodzic = 0;
 			pl.dodajKoszt();
-			hash.add((Plansza) pl.clone());
+			hash2.add(pl.zwrocUstawienie());
 			lista.add((Plansza) pl.clone());
 		}
 		
 		Boolean koniec =false;
 		Plansza nowa = null;
 		int licznik=0;
-		pl.wypisz();
+		//pl.wypisz();
 		
 		while(!koniec && licznik <1000000)
 		{
 			licznik++;
 			Collections.sort(lista);
 			pl = lista.get(0);
-			pl.wypisz();
+			//pl.wypisz();
 			lista.remove(0);
 			listaZamknieta.add((Plansza) pl.clone());
 			int ro =  listaZamknieta.size()-1;
@@ -151,23 +152,35 @@ public class Wyszukaj {
 				
 				if(nowa!=null)
 				{
-					if(hash.add(nowa))
+					if(hash2.add(nowa.zwrocUstawienie()))
 					{
 						nowa.dodajKoszt();
 						nowa.rodzic = ro;						
-						nowa.wypisz();
-						System.out.println(oo + "----------" + nowa.koszt); 
+						//nowa.wypisz();
 						lista.add((Plansza) nowa.clone());
 					}
+					System.out.println(oo + "----------" + nowa.koszt); 
 					
 					if(nowa.sprawdz()==1)
 					{
-						System.out.println(lista.size());						
-						System.out.println(listaZamknieta.size());						
-						System.out.println(hash.size());
+						System.out.println("ilosc stanow w bialej liscie=\t"+lista.size());						
+						System.out.println("ilosc stanow w czarnej liscie=\t"+listaZamknieta.size());						
+						System.out.println("ilosc stanow w hashu=\t\t"+hash2.size());
+						
+						
+						System.out.println(pl.rodzic);
+						pl = lista.get(lista.size()-1);
+						//pl.wypisz();
+						
+						while(pl.rodzic!=(listaZamknieta.get(pl.rodzic)).rodzic)
+						{
+						//System.out.println(pl.rodzic);
+						pl.wypisz();
+						pl = listaZamknieta.get(pl.rodzic);
+						}
 						
 						pl.wypisz();
-						System.out.print(pl.rodzic);
+						System.out.print("_______________" + pl.rodzic);
 						return 1;
 					}
 					nowa=null;
@@ -184,7 +197,7 @@ public class Wyszukaj {
 		if (pl.sprawdz() == 1) {
 
 			System.out.println("OK");
-			pl.wypisz();
+			//pl.wypisz();
 			return 0;
 		} else {
 			pl.rodzic = 0;
