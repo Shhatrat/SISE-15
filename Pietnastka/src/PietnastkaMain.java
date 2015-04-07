@@ -15,7 +15,7 @@ public class PietnastkaMain {
 	{
 		Plansza pl = new Plansza();
 		pl.wypelnijPoKolei();
-		pl.wylosujDoZrobienia(105);
+		pl.wylosujDoZrobienia(10);
 
 /*
  		int[][] nowa = new int[][] {{1, 5,	2,	3},	
@@ -31,9 +31,10 @@ public class PietnastkaMain {
 		System.currentTimeMillis();
 		Wyszukaj oo = new Wyszukaj(pl);
 		long start=System.currentTimeMillis();
-		oo.najnowsze();
+		//oo.bfs();
+		//oo.heurystyczny();
 		long stop=System.currentTimeMillis();
-		System.out.println("Czas wykonania:"+(stop-start));
+		System.out.println("\nCzas wykonania:"+(stop-start));
 		
 	}
 

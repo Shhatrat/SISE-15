@@ -126,12 +126,13 @@ public class Plansza implements Cloneable, Comparator<Plansza>, Comparable<Plans
 			for (int j = 0; j < 4; j++)
 				System.out.print(tab[i][j] + "\t");
 		}
-		System.out.print( "\n" + "rodzic ===========" + rodzic +" \n");
+		//System.out.print( "\n" + "rodzic ===========" + rodzic +" \n");
+		System.out.print("\n");
 	}
 
 	// 0 - nie;
 	// 1 - ok;
-	public int sprawdz() {
+	public boolean sprawdz() {
 		int[][] tab2 = new int[4][4];
 		int licz = 0;
 		for (int i = 0; i < 4; i++)
@@ -140,9 +141,9 @@ public class Plansza implements Cloneable, Comparator<Plansza>, Comparable<Plans
 				licz++;
 			}
 		if (Arrays.deepEquals(tab, tab2)) {
-			return 1;
+			return true;
 		} else {
-			return 0;
+			return false;
 		}
 	}
 

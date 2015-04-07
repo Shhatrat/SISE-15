@@ -41,7 +41,7 @@ public class Wyszukaj {
 		if (pl.zmienBezWspolrzednych(strona) == 1) {
 			
 			
-			if (pl.sprawdz() == 1) 
+			if (pl.sprawdz()) 
 			{
 
 //				lista.add((Plansza) pl.clone());
@@ -71,6 +71,7 @@ public class Wyszukaj {
 
 	}
 	
+/*	
 	public void wyszukajZwartoscia() throws CloneNotSupportedException
 	{
 		int licznik = 0;
@@ -113,12 +114,12 @@ public class Wyszukaj {
 			
 		}
 	}
-
+*/
 	
-	public int najnowsze() throws CloneNotSupportedException
+	public int heurystyczny() throws CloneNotSupportedException
 	{
 		pl.dodajKoszt();
-		if (pl.sprawdz() == 1) {
+		if (pl.sprawdz()) {
 
 			System.out.println("OK, znalazlem");
 			//pl.wypisz();
@@ -161,12 +162,8 @@ public class Wyszukaj {
 					}
 					System.out.println(oo + "----------" + nowa.koszt); 
 					
-					if(nowa.sprawdz()==1)
+					if(nowa.sprawdz())
 					{
-						System.out.println("ilosc stanow w bialej liscie=\t"+lista.size());						
-						System.out.println("ilosc stanow w czarnej liscie=\t"+listaZamknieta.size());						
-						System.out.println("ilosc stanow w hashu=\t\t"+hash2.size());
-						
 						
 						System.out.println(pl.rodzic);
 						pl = lista.get(lista.size()-1);
@@ -180,7 +177,13 @@ public class Wyszukaj {
 						}
 						
 						pl.wypisz();
-						System.out.print("_______________" + pl.rodzic);
+						System.out.print("_______________\n");
+						
+						System.out.println("ilosc stanow w bialej liscie=\t"+lista.size());						
+						System.out.println("ilosc stanow w czarnej liscie=\t"+listaZamknieta.size());						
+						System.out.println("ilosc stanow w hashu=\t\t"+hash2.size());
+						
+						
 						return 1;
 					}
 					nowa=null;
@@ -192,9 +195,9 @@ public class Wyszukaj {
 	}
 	
 	
-	public int przeszukaj() throws CloneNotSupportedException {
+	public int bfs() throws CloneNotSupportedException {
 		Plansza poczatkowa = (Plansza) pl.clone();
-		if (pl.sprawdz() == 1) {
+		if (pl.sprawdz()) {
 
 			System.out.println("OK");
 			//pl.wypisz();
