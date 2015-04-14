@@ -11,11 +11,9 @@ import java.util.Queue;
 
 public class PietnastkaMain {
 		
-	public static void main(String[] args) throws CloneNotSupportedException 
+	public static void main(String[] args)  throws CloneNotSupportedException 
 	{
-		Plansza pl = new Plansza();
-		pl.wypelnijPoKolei();
-		pl.wylosujDoZrobienia(10);
+
 
 /*
  		int[][] nowa = new int[][] {{1, 5,	2,	3},	
@@ -28,14 +26,52 @@ public class PietnastkaMain {
 		pl.pozycjaZeroY=2;
 */		
 		
-		System.currentTimeMillis();
-		Wyszukaj oo = new Wyszukaj(pl);
-		long start=System.currentTimeMillis();
-		//oo.bfs();
-		//oo.heurystyczny();
-		long stop=System.currentTimeMillis();
-		System.out.println("\nCzas wykonania:"+(stop-start));
 		
+		ArrayList<Integer> wyniki = new ArrayList<>();
+		ArrayList<Integer> wyniki2 = new ArrayList<>();
+		
+		for(int i=0; i<10; i++)
+		{
+		Plansza pl = new Plansza();
+		pl.wypelnijPoKolei();
+		pl.wylosujDoZrobienia(10);		
+		Wyszukaj oo = new Wyszukaj(pl);
+		Wyszukaj oo2 = new Wyszukaj((Plansza) pl.clone());		
+		
+		System.currentTimeMillis();
+		long start=System.currentTimeMillis();
+		if(oo.bfs()==1)
+		{
+			long stop=System.currentTimeMillis();
+			wyniki.add((int) (stop-start));
+		}
+		else
+		{
+			wyniki.add(-1);
+		};
+		
+		
+		System.currentTimeMillis();
+		long start2=System.currentTimeMillis();
+		if(oo2.heurystyczny()==1)
+		{
+			long stop2=System.currentTimeMillis();
+			wyniki2.add((int) (stop2-start2));
+		}
+		else
+		{
+			wyniki2.add(-1);
+		};
+		
+//		System.out.print(oo.bfs());
+		//oo.heurystyczny();
+		//System.out.println("\nCzas wykonania:"+(stop-start));
+		}
+		System.out.print("\n\n\n\n\n");
+		System.out.println(wyniki.toString());
+		System.out.print(wyniki2.toString());
+		System.out.print("\n\ndddd");
 	}
+
 
 }

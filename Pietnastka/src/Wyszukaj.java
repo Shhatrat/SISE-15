@@ -136,7 +136,7 @@ public class Wyszukaj {
 		int licznik=0;
 		//pl.wypisz();
 		
-		while(!koniec && licznik <1000000)
+		while(!koniec && licznik <400000)
 		{
 			licznik++;
 			Collections.sort(lista);
@@ -215,7 +215,8 @@ public class Wyszukaj {
 		while (!koniec) {
 			koniec = sprawdzIdodajDoListy(licznik);
 			licznik++;
-			if(licznik > 1221010){koniec= true;}
+			System.out.println("LIECZNIK+++++++++++++++++++++ "+ licznik);
+			if(licznik > 400000){koniec= true; return 0;}
 			
 		}	
 
@@ -230,7 +231,7 @@ public class Wyszukaj {
 
 		System.out.println("\n\nsprawdzenie poczatkowej");
 		poczatkowa.wypisz();
-		return 0;
+		return 1;
 	}
 	
 }
