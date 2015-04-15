@@ -70,7 +70,6 @@ public class PietnastkaMain {
 		System.out.print("\n\n\n\n\n");
 		System.out.println(wyniki.toString());
 		System.out.print(wyniki2.toString());
-		System.out.print("\n\ndddd");
 	}
 
 
